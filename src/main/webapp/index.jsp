@@ -17,7 +17,7 @@
 	<div id="main">
 	
 		<div class="text">
-			<h2>Welcome to the Book Management App! Choose an option below to get started.</h2>
+			<h2>Welcome to Book Management App! Choose an option below to get started.</h2>
 		</div>
 	
 		<hr><br>
