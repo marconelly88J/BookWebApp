@@ -56,7 +56,7 @@ public class AddNewBook extends HttpServlet {
 					Book book = new Book(bookID, title, author, bookGenre, pYear, copies, Status.DOSTUPNA);
 
 					try {
-						PrintWriter writer = new PrintWriter(new FileWriter(DATABASE_PATH.DATABASE_PATH, true));
+						PrintWriter writer = new PrintWriter(new FileWriter(DATABASE_PATH, true));
 
 						writer.println(book.getId() + ";" + "\"" + book.getTitle() + "\"" + ";" + book.getAuthor() + ";" +
 								book.getGenre() + ";" + book.getPublishYear() + ";" + book.getStock() + ";");

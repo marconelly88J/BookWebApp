@@ -1,32 +1,25 @@
 
 package model;
-import java.io.Serializable;
-
-import model.Genre;
-import model.Status;
 
 
 
-public class Book implements Serializable{
+
+public class Book{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private int id;
 	private String title;
 	private String author;
 	private int publishYear;
 	private int stock;
 	private int initialStock;
-	private Status statusString;
-	private Genre genre;
+	private String statusString;
+	private String genre;
 	
 	public Book() {
 		
 	}
 	
-	public Book(int id, String title, String author, Genre genre, int publishYear, int stock, Status statusString) {
+	public Book(int id, String title, String author, String genre, int publishYear, int stock, String statusString) {
 		
 		this.id = id;
 		this.title = title;
@@ -86,26 +79,26 @@ public class Book implements Serializable{
 		this.publishYear = publishYear;
 	}
 
-	public Status getStatus() {
+	public String getStatus() {
 		return statusString;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.statusString = status;
 	}
 	
-	public Genre getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
-	public void setGenre(Genre genre) {
-		this.genre = genre;
+	public void setGenre(String string) {
+		this.genre = string;
 	}
 		
 	
 	@Override	
 	public String toString() {
-		String statusString = this.getStatus() == Status.IZDATA ? "\u001B[31mIZDATA\u001B[0m" : "\u001B[32mDOSTUPNA\u001B[0m";
+		String statusString = this.getStatus() == "IZDATA" ? "\u001B[31mIZDATA\u001B[0m" : "\u001B[32mDOSTUPNA\u001B[0m";
 		return "ID: " + id + "; Naslov: "+title+"; Autor: " + author + 
 				"; Godina izdanja: " + publishYear
 				+ "; Primeraka: "+stock+"; Zanr: "+getGenre()+"; Status: " + statusString;
