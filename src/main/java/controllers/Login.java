@@ -28,14 +28,10 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		String action = request.getParameter("action");
-
-		if(action.equals("logout")) {
-			request.getSession().invalidate();
-			response.sendRedirect("login.jsp");
-		}
-
-
+	
+		request.getSession().invalidate();
+		response.sendRedirect("login.jsp");
+		
 	}
 
 
@@ -43,41 +39,37 @@ public class Login extends HttpServlet {
 
 		DAO dao = new DAO();
 		String action = request.getParameter("action");
-		String userEmail = request.getParameter("email");
+		String email = request.getParameter("email");
 
 		if(action != null) {
-			// validacija email-a
-			if(checkEmail(userEmail)) {
-				// da li postoji user_email u bazi
-				if( userExists(userEmail)) {
-					User user = new User(userEmail);
-					//dao.insertUser(userEmail);
 
-					//ArrayList<Item> item_list =  dao.selectAllItems();
-					HttpSession userSession = request.getSession();
-					//items_render_session.setAttribute("item_list", item_list);
-					userSession.setAttribute("user_session", user);
-					userSession.setMaxInactiveInterval(600);
-
-					request.setAttribute("user", user);
-					request.getRequestDispatcher("index.jsp").forward(request, response);
-					response.sendRedirect("index.jsp");
-				}else {
-					User newUser = new User(userEmail);
-					dao.insertUser(userEmail);
-					
-					
-					request.setAttribute("user", newUser);
-					request.getSession().setAttribute("user_session", newUser);
-					request.getSession().setMaxInactiveInterval(600);
-					request.getRequestDispatcher("index.jsp").forward(request, response);
-					response.sendRedirect("index.jsp");
-				}
+			if(isAdmin(email)) {
+				User admin = new User();
+				request.getSession().setAttribute("admin_session", admin);
+				response.sendRedirect("index_admin.jsp");
 			}else {
-				String msg = "Must enter valid email!"; 
-				request.setAttribute("msg", msg);
-				request.getRequestDispatcher("welcome_page.jsp").forward(request, response);
+
+				// validacija email-a za user login
+				if(checkEmail(email)) {
+					// da li postoji user_email u bazi
+					if( userExists(email)) {
+						User user = new User(email);
+						HttpSession userSession = request.getSession();
+						userSession.setAttribute("user_session", user);
+						response.sendRedirect("index_user.jsp");
+					}else {
+						User newUser = new User(email);
+						dao.insertUser(email);
+						request.getSession().setAttribute("user_session", newUser);
+						response.sendRedirect("index_user.jsp");
+					}
+				}else {
+					String msg = "Must enter valid email!"; 
+					request.setAttribute("msg", msg);
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				}
 			}
+
 		}
 
 	}
@@ -88,9 +80,15 @@ public class Login extends HttpServlet {
 		if(user != null)
 			return true;
 		return false;
-		
+
 	}
-	
+
+	public boolean isAdmin(String email) {
+		if(email.equals("admin"))
+			return true;
+		return false;
+	}
+
 	///////////////////////////////////////////////////
 	public boolean checkEmail(String email) {
 

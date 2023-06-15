@@ -14,12 +14,13 @@ public class Book{
 	private int initialStock;
 	private String statusString;
 	private String genre;
+	private String imgPath;
 	
 	public Book() {
 		
 	}
 	
-	public Book(int id, String title, String author, String genre, int publishYear, int stock, String statusString) {
+	public Book(int id, String title, String author, String genre, int publishYear, int stock, String statusString, String imgPath) {
 		
 		this.id = id;
 		this.title = title;
@@ -29,6 +30,7 @@ public class Book{
 		this.initialStock = stock;
 		this.statusString = statusString;
 		this.genre = genre;
+		this.imgPath = imgPath;
 	}
 
 	public void setInitialStock(int initialStock) {
@@ -95,7 +97,14 @@ public class Book{
 		this.genre = string;
 	}
 		
-	
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
 	@Override	
 	public String toString() {
 		String statusString = this.getStatus() == "IZDATA" ? "\u001B[31mIZDATA\u001B[0m" : "\u001B[32mDOSTUPNA\u001B[0m";

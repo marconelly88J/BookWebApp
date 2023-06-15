@@ -65,6 +65,7 @@ public class DAO {
 				book.setGenre(rs.getString("genre"));
 				book.setPublishYear(rs.getInt("publish_year"));
 				book.setStock(rs.getInt("copies"));
+				book.setImgPath(rs.getString("imgPath"));
 				
 				listOfBooks.add(book);
 			}

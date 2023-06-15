@@ -18,12 +18,13 @@
 
 	<header>
 		<h1>Book Management</h1>
+		<input type="submit" name="logout" action="logout" value="LogOut">
 	</header>
 
 	<div id="main">
 
 		<div class="text">
-			<h2><%= user.getEmail() %>, Welcome to Book Management App!
+			<h2><%= user_session.getEmail() %>, Welcome to Book Management App!
 				Choose an option below to get started.
 			</h2>
 		</div>
