@@ -52,7 +52,9 @@
 			<button type="submit" class="btn" name="action" value="titleSearch">Search</button>
 
 			<br>
-			<br> By genre: <br> <select name="genre">
+			<br> 
+			By genre: <br> 
+			<select name="genre">
 				<option value="DRAMA" selected>Drama</option>
 				<option value="HORROR">Horror</option>
 				<option value="FANTASY">Fantasy</option>
@@ -60,6 +62,7 @@
 			</select> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="submit" class="btn" name="action" value="genreSearch">Search</button>
+			
 		</form>
 
 		<br>

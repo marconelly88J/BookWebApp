@@ -38,13 +38,13 @@ public class DAO {
 		}
 	}
 	
-	public List<Book> selectAllBooks(){
+	public ArrayList<Book> selectAllBooks(){
 		
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		
-		List<Book> listOfBooks = new ArrayList<>();
+		ArrayList<Book> listOfBooks = new ArrayList<>();
 		Book book = null;
 				
             try {

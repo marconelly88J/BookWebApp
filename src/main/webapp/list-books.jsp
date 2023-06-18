@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="model.User"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Book"%>
@@ -5,8 +6,8 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	//User user = (User) request.getAttribute("user");
-	ArrayList<Book> books = (ArrayList<Book>) request.getAttribute("books");
+	
+	ArrayList<Book> list_all_books = (ArrayList<Book>) request.getAttribute("list_all_books");
 	User user_session = (User) request.getSession().getAttribute("user_session");
 %>
 
@@ -26,20 +27,32 @@
 	
 	<div id="main">
 	
-	<div id="book-container">	
+	<% if(list_all_books != null) { for(Book book : list_all_books) { %>
+	<div id="book-container">
+		
 		<div class="book-cover">
-			<img alt="Book cover" src="img/1984.jpg">
+			<img alt="Book cover" src="<%= book.getImgPath() %>">
 		</div>
 		
 		<div class="book-info">
-			<div>Title: 1984</div>
-			<div>Author: G. Orwell</div>
-			<div>Publish year: 1984</div>
+		
+			<div>Title: <%= book.getTitle() %></div>
+			<div>Author: <%= book.getAuthor() %></div>
+			<div>Publish year: <%= book.getPublishYear() %></div>
+			<div>In Stock: <%= book.getStock() %></div>
+			<!-- provera kopija knjige -->
+			<% String book_status = (book.getStock() == 0 ) ? "Out of stock" : "AVAILABLE"; %>
+			<div>Status: <%= book_status %> </div>
+			
 		</div>
+		
 	</div>
+	<hr>
+	<% } } %>
 	
 	<hr>
 	<a href="index_user.jsp" style="margin-left: 580px;">Back to Home</a>
+	
 	</div>
 </body>
 </html>

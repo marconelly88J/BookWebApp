@@ -28,10 +28,10 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	
+		// terminate user session and redirect to login page
 		request.getSession().invalidate();
 		response.sendRedirect("login.jsp");
-		
+
 	}
 
 

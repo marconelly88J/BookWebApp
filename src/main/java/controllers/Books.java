@@ -40,24 +40,24 @@ public class Books extends HttpServlet {
 		if (action.equals("listBooks")) {
 
 			try {
-				List<Book> books = new ArrayList<>();
+				ArrayList<Book> books = new ArrayList<>();
 				books = dao.selectAllBooks();
 				
-				request.setAttribute("books", books);
+				request.setAttribute("list_all_books", books);
 				request.getRequestDispatcher("list-books.jsp").forward(request, response);
 
 			} catch (FileNotFoundException e) {
-				error = "File not found";
+				error = "File not found: "+e.getMessage();
 				request.setAttribute("error", error);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} catch (IOException e) {
-				error = "I/O error!";
+				error = "error: "+e.getMessage();
 				request.setAttribute("error", error);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 				
 		} else {
-			error += "Invalid input!";
+			error += "Invalid action!";
 			request.setAttribute("error", error);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
