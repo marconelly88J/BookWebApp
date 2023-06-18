@@ -26,7 +26,7 @@ h1 {
   width: 500px;		
   display: flex;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 200px;
 }
@@ -39,6 +39,9 @@ h1 {
 .book-cover img {
   max-width: 100%;
   height: auto;
+  border: 1px, solid, black;
+  box-shadow: 0 10px 10px black;
+  
 }
 
 .book-info {
