@@ -4,14 +4,14 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import dao.DAO;
-
+import model.Admin;
 import model.User;
+import validator.Validator;
 
 
 @WebServlet("/Login")
@@ -43,19 +43,17 @@ public class Login extends HttpServlet {
 
 		if(action != null) {
 
-			if(isAdmin(email)) {
-				User admin = new User();
+			if(Validator.isAdmin(email)) {
+				Admin admin = new Admin(email);
 				request.getSession().setAttribute("admin_session", admin);
 				response.sendRedirect("index_admin.jsp");
 			}else {
-
-				// validacija email-a za user login
-				if(checkEmail(email)) {
-					// da li postoji user_email u bazi
-					if( userExists(email)) {
+				// validacija email-a za email/user login
+				if(Validator.isValidEmail(email)) {
+					// da li postoji email u bazi
+					if( Validator.userExists(email)) {
 						User user = new User(email);
-						HttpSession userSession = request.getSession();
-						userSession.setAttribute("user_session", user);
+						request.getSession().setAttribute("user_session", user);
 						response.sendRedirect("index_user.jsp");
 					}else {
 						User newUser = new User(email);
@@ -69,35 +67,10 @@ public class Login extends HttpServlet {
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				}
 			}
-
 		}
-
 	}
 
-	public boolean userExists(String email) {
-		DAO dao = new DAO();
-		User user = dao.selectUser(email);
-		if(user != null)
-			return true;
-		return false;
 
-	}
-
-	public boolean isAdmin(String email) {
-		if(email.equals("admin"))
-			return true;
-		return false;
-	}
-
-	///////////////////////////////////////////////////
-	public boolean checkEmail(String email) {
-
-		if( email == null || email.isEmpty() || !email.contains("@") ) 
-			return false;
-		else 
-			return true;
-
-	}
 
 
 }

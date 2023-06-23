@@ -1,10 +1,11 @@
+<%@page import="model.Admin"%>
 <%@page import="model.User"%>
 <%@ page import="model.Genre"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	
-	User admin_session = (User) request.getSession().getAttribute("admin_session");
+	Admin admin_session = (Admin) request.getSession().getAttribute("admin_session");
 %>
 <% if(admin_session != null) { %>
 <!DOCTYPE html>

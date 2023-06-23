@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import model.Admin;
 import model.Book;
 import model.User;
 
@@ -24,6 +25,8 @@ public class DAO {
 															+ " VALUES (NULL, ?, ?, ?, ?, ?)";
 	private static String INSERT_USER = "INSERT INTO `users` (`id`, `email`) VALUES (NULL, ?)";
 	private static String CHECK_USER = "SELECT * FROM `users` WHERE email = ?";
+	
+	private static String CHECK_ADMIN = "SELECT * FROM `admins` WHERE username = ?";
 	
 	public DAO(){
 		
@@ -206,5 +209,41 @@ public User selectUser(String email) {
 	}
 	return user;
 }
+
+///////////////////////////////////////////////////////////////////
+
+public Admin selectAdmin(String email) {
+	
+	Connection con = null;
+	PreparedStatement pstm = null;
+	ResultSet rs = null;
+	Admin admin = null;
+			
+        try {
+		con = ds.getConnection();
+		pstm = con.prepareStatement(CHECK_ADMIN);
+
+		// DOPUNJAVANJE SQL STRINGA, SVAKI ? SE MORA PODESITI 
+		pstm.setString(1, email);
+		pstm.execute();
+		rs = pstm.getResultSet();
+		
+		if(rs.next()) {
+			admin = new Admin();
+			admin.setId(rs.getInt("id"));
+			admin.setUsername(rs.getString("username"));
+        }
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	try {
+		con.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return admin;
+}
+/////////////////////////////////////////
 
 }
