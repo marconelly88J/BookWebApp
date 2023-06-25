@@ -4,10 +4,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	
 	Admin admin_session = (Admin) request.getSession().getAttribute("admin_session");
-%>
-<% if(admin_session != null) { %>
+	if(admin_session != null) { %>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,21 +32,13 @@
 		<hr>
 		<br> <br>
 
-		<form action="books" method="post">
+		<form action="./adminController" method="post">
 			<button type="submit" class="btn" name="action" value="addBook">ADD
 				BOOK</button>
-
 			<br>
 			<br>
-
-			<button type="submit" class="btn" name="action" value="bookDelete">DELETE
-				BOOK</button>
-
-			<br>
-			<br>
-
-			<button type="submit" class="btn" name="action" value="stockUpdate">UPDATE
-				BOOK COPIES</button>
+			
+			<button type="submit" class="btn" name="action" value="bookService">BOOK SERVICE</button>
 		</form>
 
 		<br>

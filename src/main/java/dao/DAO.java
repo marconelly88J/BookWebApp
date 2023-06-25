@@ -21,8 +21,10 @@ public class DAO {
 
 	private static String SELECT_ALL_BOOKS = "SELECT * FROM books";
 	private static String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id = ?";
-	private static String INSERT_BOOK = "INSERT INTO books (`id`, `title`, `author`, `genre`, `publish_year`, `copies`)"
-															+ " VALUES (NULL, ?, ?, ?, ?, ?)";
+	private static String INSERT_BOOK = "INSERT INTO books (`id`, `title`, `author`, `genre`, `publish_year`, `copies`, `imgPath`)"
+															+ " VALUES (NULL, ?, ?, ?, ?, ?, ? )";
+	private static String DELETE_BOOK_BY_ID = "DELETE FROM books WHERE id = ?";
+	
 	private static String INSERT_USER = "INSERT INTO `users` (`id`, `email`) VALUES (NULL, ?)";
 	private static String CHECK_USER = "SELECT * FROM `users` WHERE email = ?";
 	
@@ -113,6 +115,7 @@ public Book selectBookById(int id){
 				book.setGenre(rs.getString("genre"));
 				book.setPublishYear(rs.getInt("publish_year"));
 				book.setStock(rs.getInt("copies"));
+				book.setImgPath(rs.getString("imgPath"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -135,10 +138,11 @@ public void insertBook(Book book) {
 		pstm = con.prepareStatement(INSERT_BOOK);
 		
 		pstm.setString(1, book.getTitle());
-		pstm.setString(1, book.getAuthor());
-		pstm.setString(1, book.getGenre());
-		pstm.setInt	  (1, book.getPublishYear());
-		pstm.setInt   (1, book.getStock());
+		pstm.setString(2, book.getAuthor());
+		pstm.setString(3, book.getGenre());
+		pstm.setInt	  (4, book.getPublishYear());
+		pstm.setInt   (5, book.getStock());
+		pstm.setString(6, book.getImgPath());
 		pstm.execute();
 
 	} catch (SQLException e) {
@@ -151,7 +155,31 @@ public void insertBook(Book book) {
 	}
 	
 }
+///////////////////////////////////////////////////////////
+
+public void deleteBookById(int id) {
 	
+	Connection con = null;
+	PreparedStatement pstm = null;
+			
+        try {
+		con = ds.getConnection();
+		pstm = con.prepareStatement(DELETE_BOOK_BY_ID);
+		pstm.setInt(1, id);
+		pstm.execute();
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	try {
+		con.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+}
+
+/////////////////////////////////////////////////////////////
 	
 public void insertUser(String email) {
 	

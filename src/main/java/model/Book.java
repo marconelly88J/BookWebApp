@@ -32,6 +32,16 @@ public class Book{
 		this.genre = genre;
 		this.imgPath = imgPath;
 	}
+	
+	public Book(String title, String author, int publishYear, int stock, String genre, String imgPath) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.publishYear = publishYear;
+		this.stock = stock;
+		this.genre = genre;
+		this.imgPath = imgPath;
+	}
 
 	public void setInitialStock(int initialStock) {
 		this.initialStock = initialStock;

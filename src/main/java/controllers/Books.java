@@ -32,7 +32,7 @@ public class Books extends HttpServlet {
 			throws ServletException, IOException {
 		DAO dao = new DAO();
 		
-		String action = request.getParameter("action") != null ? request.getParameter("action") : "";
+		String action = request.getParameter("action");
 		String error = "";
 
 

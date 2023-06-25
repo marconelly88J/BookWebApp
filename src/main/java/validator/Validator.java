@@ -12,7 +12,7 @@ public class Validator {
 		try {
 			user = dao.selectUser(email);
 		} catch (Exception e) {
-			e.getMessage();
+			e.printStackTrace();
 		}
 		if(user != null)
 			return true;
@@ -26,7 +26,7 @@ public class Validator {
 		try {
 			admin = dao.selectAdmin(email);
 		} catch (Exception e) {
-			e.getMessage();
+			e.printStackTrace();
 		}
 		if(admin != null)
 			return true;

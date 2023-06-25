@@ -36,8 +36,9 @@
 		
 		<div class="book-info">
 		
-			<div>Title: <%= book.getTitle() %></div>
+			<div>Title: <b><%= book.getTitle() %></b></div>
 			<div>Author: <%= book.getAuthor() %></div>
+			<div>Genre: <%= book.getGenre() %></div>
 			<div>Publish year: <%= book.getPublishYear() %></div>
 			<div>In Stock: <%= book.getStock() %></div>
 			<!-- provera kopija knjige -->

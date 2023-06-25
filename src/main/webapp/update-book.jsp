@@ -27,7 +27,7 @@
 	<span style="color: green; font-size: 20px;">${requestScope.successMsg}</span>
 	<span style="color: red; font-size: 20px;">${requestScope.errorMsg}</span>
 	<hr>
-	<a href="index.jsp">Back to Home</a>
+	<a href="index_admin.jsp">Back to Home</a>
 	
 
 </body>
