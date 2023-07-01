@@ -5,6 +5,7 @@
 <%
 	//User user = (User) request.getAttribute("user");
 	User user_session = (User) request.getSession().getAttribute("user_session");
+	
 %>
 
 <% if(user_session != null) { %>
