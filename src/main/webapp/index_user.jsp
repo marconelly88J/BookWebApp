@@ -40,22 +40,26 @@
 
 		<form action="findBooks" method="get" id="find-book">
 
-
+			<!--------------- List all books ----------------->
 			<button type="submit" class="btn" name="action" value="listBooks">LIST
 				OF ALL BOOKS</button> <br>
 
+			<!--------------- Search by author ----------------->
 			<br> By author: <br> <input type="text" name="author">
 			<button type="submit" class="btn" name="action" value="authorSearch">Search</button>
 
 			<br>
+			<!--------------- Search by title ----------------->
 			<br> By title: <br> <input type="text" name="title">
 			<button type="submit" class="btn" name="action" value="titleSearch">Search</button>
 
 			<br>
 			<br> 
+			
+			<!--------------- Search by genre ----------------->
 			By genre: <br> 
 			<select name="genre">
-				<option value="DRAMA" selected>Drama</option>
+				<option value="DRAMA">Drama</option>
 				<option value="HORROR">Horror</option>
 				<option value="FANTASY">Fantasy</option>
 				<option value="ROMANCE">Romance</option>

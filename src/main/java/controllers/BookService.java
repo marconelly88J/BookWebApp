@@ -56,6 +56,47 @@ public class BookService extends HttpServlet {
 				}
 				request.getRequestDispatcher("book-service.jsp").forward(request, response);
 				break;
+				
+			default:
+				break;
+			}
+			
+		}
+		
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//doGet(request, response);
+		
+		DAO dao = new DAO();
+		String action = request.getParameter("action");
+		String bookID = request.getParameter("id");
+		String newNumberOfCopies = request.getParameter("newNumberOfCopies");
+		String errorMsg = "";
+		
+		if(action != null) {
+			
+			switch (action) {
+			
+			case "updateCopies":
+				
+				try {
+					int newCopies = Integer.parseInt(newNumberOfCopies);
+					int book_id = Integer.parseInt(bookID);
+					dao.updateBookCopies(book_id, newCopies);
+					
+					ArrayList<Book> books = new ArrayList<>();
+					books = dao.selectAllBooks();
+					
+					request.setAttribute("list_all_books", books);
+					request.getRequestDispatcher("book-service.jsp").forward(request, response);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					errorMsg += ""+e.getMessage();
+				} 
 
 			default:
 				break;
@@ -63,14 +104,6 @@ public class BookService extends HttpServlet {
 			
 		}
 		
-		
-		
-	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doGet(request, response);
 	}
 
 }

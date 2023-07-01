@@ -21,10 +21,12 @@
 <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+
 	<header>
 		<h1>Book List</h1>
 	</header>
-	
+	<a href="index_user.jsp" style="margin-left: 580px;">Back to Home</a>
+	<hr>
 	<div id="main">
 	
 	<% if(list_all_books != null) { for(Book book : list_all_books) { %>
@@ -37,13 +39,17 @@
 		<div class="book-info">
 		
 			<div>Title: <b><%= book.getTitle() %></b></div>
-			<div>Author: <%= book.getAuthor() %></div>
-			<div>Genre: <%= book.getGenre() %></div>
-			<div>Publish year: <%= book.getPublishYear() %></div>
-			<div>In Stock: <%= book.getStock() %></div>
+			<div><b>Author:</b> <%= book.getAuthor() %></div>
+			<div><b>Genre:</b> <%= book.getGenre() %></div>
+			<div><b>Publish year:</b> <%= book.getPublishYear() %></div>
+			<div><b>In Stock:</b> <%= book.getStock() %></div>
 			<!-- provera kopija knjige -->
-			<% String book_status = (book.getStock() == 0 ) ? "Out of stock" : "AVAILABLE"; %>
-			<div>Status: <%= book_status %> </div>
+			<% 
+				String book_status = (book.getStock() == 0) ? "Out of stock" : "AVAILABLE";
+   				String status_color = (book.getStock() == 0) ? "red" : "green"; 
+   			%>
+			<div style="color: <%= status_color %>"><%= book_status %></div>
+
 			
 		</div>
 		
@@ -55,6 +61,7 @@
 	<a href="index_user.jsp" style="margin-left: 580px;">Back to Home</a>
 	
 	</div>
+	
 </body>
 </html>
 <% } else { request.getSession().invalidate(); response.sendRedirect("login.jsp");} %>

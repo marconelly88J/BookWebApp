@@ -23,6 +23,9 @@ public class DAO {
 	private static String SELECT_BOOK_BY_ID = "SELECT * FROM books WHERE id = ?";
 	private static String INSERT_BOOK = "INSERT INTO books (`id`, `title`, `author`, `genre`, `publish_year`, `copies`, `imgPath`)"
 															+ " VALUES (NULL, ?, ?, ?, ?, ?, ? )";
+	
+	
+	private static String UPDATE_BOOK_COPIES = "UPDATE `books` SET `copies`= ? WHERE `id` = ?";
 	private static String DELETE_BOOK_BY_ID = "DELETE FROM books WHERE id = ?";
 	
 	private static String INSERT_USER = "INSERT INTO `users` (`id`, `email`) VALUES (NULL, ?)";
@@ -127,6 +130,36 @@ public Book selectBookById(int id){
 		}
 		return book;
 	}
+///////////////////////////////////////////////////////////
+
+public void updateBookCopies(int id, int newCopies){
+	
+	Connection con = null;
+    PreparedStatement pstm = null;
+    
+    try {
+    	
+        con = ds.getConnection();
+        pstm = con.prepareStatement(UPDATE_BOOK_COPIES);
+        pstm.setInt(1, newCopies);
+        pstm.setInt(2, id);
+        
+		pstm.execute();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		e.getMessage();
+	}
+	try {
+		con.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		e.getMessage();
+	}
+	
+}
+
+//////////////////////////////////////////////////////////
 
 public void insertBook(Book book) {
 	

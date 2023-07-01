@@ -25,38 +25,43 @@
 	
 	<div id="main">
 	
-	<% if(list_all_books != null) { for(Book book : list_all_books) { %>
-	<div id="book-container">
-		
-		<div class="book-cover">
-			<img alt="Book cover" src="<%= book.getImgPath() %>">
-		</div>
-		<br>
-		<div class="book-info">
-		
-			<div>Title: <b><%= book.getTitle() %></b></div>
-			<div>Author: <%= book.getAuthor() %></div>
-			<div>Genre: <%= book.getGenre() %></div>
-			<div>Publish year: <%= book.getPublishYear() %></div>
-			<div>In Stock: <%= book.getStock() %></div>
-			<!-- provera kopija knjige -->
-			<% String book_status = (book.getStock() == 0 ) ? "Out of stock" : "AVAILABLE"; %>
-			<div>Status: <%= book_status %> </div>
-			<div>Book ID: <%= book.getId() %></div><br>
-			
-			<input style="width:105px;" type="text" placeholder="number of copies"> 
-			<button type="submit" name="action" value="updateCopies">Update book copies</button>
-			
-			<br> <br>
-			
-			<a href="BookService?action=deleteBook&id=<%= book.getId()%>">REMOVE BOOK</a>
-			
-			<hr>
-		</div>
-	
-	</div>
-	
-	<% } } %>
+	<% 	
+		if (list_all_books != null) {
+    	for (Book book : list_all_books) {
+	%>
+    <div id="book-container">
+        <div class="book-cover">
+            <img alt="Book cover" src="<%= book.getImgPath() %>">
+        </div>
+        <br>
+        <div class="book-info">
+            <div>Title: <b><%= book.getTitle() %></b></div>
+            <div><b>Author:</b> <%= book.getAuthor() %></div>
+            <div><b>Genre:</b> <%= book.getGenre() %></div>
+            <div><b>Publish year:</b> <%= book.getPublishYear() %></div>
+            <div><b>In Stock:</b> <%= book.getStock() %></div>
+            <% 
+				String book_status = (book.getStock() == 0) ? "Out of stock" : "AVAILABLE";
+   				String status_color = (book.getStock() == 0) ? "red" : "green"; 
+   			%>
+			<div style="color: <%= status_color %>"><%= book_status %></div>
+            <div><b>Book ID:</b> <%= book.getId() %></div><br>
+            
+            <form action="BookService" method="post">
+                <input style="width:105px;" type="text" name="newNumberOfCopies" placeholder="number of copies">
+                <input type="hidden" name="action" value="updateCopies">
+                <input type="hidden" name="id" value="<%= book.getId() %>">
+                <button type="submit">Update book copies</button>
+            </form>
+            
+            <br><br>
+            
+            <a href="BookService?action=deleteBook&id=<%= book.getId()%>">REMOVE BOOK</a>
+            
+            <hr>
+        </div>
+    </div>
+		<% }} %>
 	
 	</div>
 	
