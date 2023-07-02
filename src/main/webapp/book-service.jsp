@@ -13,7 +13,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Book Service</title>
-<link rel="stylesheet" href="css/book_delete.css">
+<link rel="stylesheet" href="css/book_service.css">
 </head>
 <body>
 

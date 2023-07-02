@@ -19,16 +19,16 @@
 <body>
 
 	<header>
-		<h1>Book Management</h1>
+		<h1>Online Library</h1>
 		<form action="./Login" method="get">
-			<input type="submit" name="action" value="Logout">
+			<input type="submit" name="action" value="logout">
 		</form>
 	</header>
 
 	<div id="main">
 
 		<div class="text">
-			<h2><%= user_session.getEmail() %>, Welcome to Book Management App!
+			<h2><%= user_session.getEmail() %>, Welcome to Online Library!
 				Choose an option below to get started.
 			</h2>
 		</div>
@@ -77,11 +77,7 @@
 			${requestScope.error}</span>
 		<hr>
 
-
-
 	</div>
-
-
 
 </body>
 </html>

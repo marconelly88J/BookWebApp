@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#login-id{
+	width: 80%;
+	
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: auto;
+	margin-top: 150px;
+	text-align: center;
+	background-color: #c0c0c0;
+}
+
+#login-id .btn{
+	width: 80px;
+	height: 30px;
+}
