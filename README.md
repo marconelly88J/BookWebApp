@@ -1,2 +1,2 @@
 # Book Management
-Local library for seraching desired books.
+Local library for searching desired books.
